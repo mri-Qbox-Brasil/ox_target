@@ -37,9 +37,12 @@ files {
 	'client/framework/nd.lua',
 	'client/framework/ox.lua',
 	'client/framework/esx.lua',
+	'client/framework/qb.lua',
 	'client/compat/qtarget.lua',
+	'client/compat/qb-target.lua',
 }
 
 provide 'qtarget'
+provide 'qb-target'
 
 dependency 'ox_lib'
