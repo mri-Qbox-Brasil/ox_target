@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 :root {
-  --color-default: #cfd2da;
+  --color-default: #40c057;
   --color-hover: white;
 }
 
@@ -12,6 +11,7 @@ body {
   margin: 0;
   user-select: none;
   overflow: hidden;
+  font-family: 'Nunito', sans-serif;
 }
 
 p {
@@ -23,12 +23,13 @@ p {
 }
 
 #eye {
+  content: "\F33E";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 22pt;
-  fill: black;
+  font-size: 1.5vh;
+  fill: #40c057;
 }
 
 .eye-hover {
@@ -37,8 +38,8 @@ p {
 
 #options-wrapper {
   position: absolute;
-  top: calc(48.4%);
-  left: calc(50% + 18pt);
+  top: calc(48.5%);
+  left: calc(50% + 30pt);
 }
 
 .option-container {
@@ -47,45 +48,61 @@ p {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  font-family: "Nunito";
-  background: linear-gradient(
-    90deg,
-    rgba(20, 20, 20, 0.7) 0%,
-    rgba(20, 20, 20, 0.6) 66%,
-    rgba(47, 48, 53, 0) 100%
-  );
-  font-size: 11pt;
-  line-height: 22pt;
+  font-family: 'Nunito', sans-serif;
+  background-color: rgba(30, 30, 30, 0.7);
+  font-size: 10pt;
+  line-height: 14pt;
   vertical-align: middle;
   margin: 2pt;
-  transition: 300ms;
+  padding: 2px 8px;
+  transition: background-color 300ms, box-shadow 300ms, border-color 300ms;
   transform-origin: left top;
   scale: 1;
-  height: 22pt;
-  width: 150pt;
-  top: 0;
+  height: auto;
+  max-width: 100%;
+  border-radius: 3px;
+  border: 1px solid transparent;
 }
 
 .option-container:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(30, 30, 30, 0.7) 0%,
-    rgba(30, 30, 30, 0.6) 66%,
-    rgba(57, 58, 63, 0) 100%
-  );
-  transform-origin: left top;
+  background-color: rgba(30, 30, 30, 0.95);
   color: var(--color-hover);
-  margin-left: 4pt;
+  border-color: #40c057;
+  box-shadow: 0 0 20px #40c05770;
+}
+
+.option-container.selected {
+  background-color: rgba(30, 30, 30, 0.95);
+  border-color: #40c057;
+  color: var(--color-hover);
 }
 
 .option-icon {
   font-size: 12pt;
-  line-height: 22pt;
+  line-height: 14pt;
   width: 14pt;
-  margin: 5pt;
+  margin-right: 5pt;
   color: var(--color-default);
 }
 
 .option-label {
   font-weight: 500;
+  color: #fff;
+  margin-right: auto;
+}
+
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 5px #40c057) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #ffffff) brightness(1.5);
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #40c057) brightness(1);
+  }
+}
+
+#eyeSvg {
+  animation: glow 1.5s infinite;
 }
