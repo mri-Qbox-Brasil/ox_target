@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 :root {
   --color-default: #40c057;
+  --color-shadow: #40c05770;
   --color-hover: white;
 }
 
@@ -29,7 +30,6 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.5vh;
-  fill: #40c057;
 }
 
 .eye-hover {
@@ -62,18 +62,19 @@ p {
   max-width: 100%;
   border-radius: 3px;
   border: 1px solid transparent;
+
 }
 
 .option-container:hover {
   background-color: rgba(30, 30, 30, 0.95);
   color: var(--color-hover);
-  border-color: #40c057;
-  box-shadow: 0 0 20px #40c05770;
+  border-color: var(--color-default);
+  box-shadow: 0 0 20px var(--color-shadow);
 }
 
 .option-container.selected {
   background-color: rgba(30, 30, 30, 0.95);
-  border-color: #40c057;
+  border-color: var(--color-default);
   color: var(--color-hover);
 }
 
@@ -93,15 +94,18 @@ p {
 
 @keyframes glow {
   0% {
-    filter: drop-shadow(0 0 5px #40c057) brightness(1);
+    filter: drop-shadow(0 0 5px var(--color-default)) brightness(1);
   }
   50% {
     filter: drop-shadow(0 0 20px #ffffff) brightness(1.5);
   }
   100% {
-    filter: drop-shadow(0 0 5px #40c057) brightness(1);
+    filter: drop-shadow(0 0 5px var(--color-default)) brightness(1);
   }
 }
+
+/* Set first circle of the eye to theme color */
+#eyeSvg circle:first-child { fill: var(--color-default); }
 
 #eyeSvg {
   animation: glow 1.5s infinite;

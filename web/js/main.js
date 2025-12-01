@@ -2,10 +2,47 @@ import { createOptions } from "./createOptions.js";
 
 const optionsWrapper = document.getElementById("options-wrapper");
 const body = document.body;
-const eye = document.getElementById("eyeSvg");
+const eyeContainer = document.getElementById("eye");
+let eye = null;
+
+async function loadSvg(name = 'circle') {
+  try {
+    const res = await fetch(`svg/${name}.svg`);
+    if (!res.ok) throw new Error('SVG not found');
+    const text = await res.text();
+    eyeContainer.innerHTML = text;
+    eye = document.getElementById('eyeSvg');
+  } catch (e) {
+    // fallback to circle if specific svg not found
+    if (name !== 'circle') return loadSvg('circle');
+  }
+}
 
 window.addEventListener("message", (event) => {
   optionsWrapper.innerHTML = "";
+
+  // Apply theme color and shadow from client (shadow convar optional)
+  if (event.data?.themeShadow) {
+    document.documentElement.style.setProperty('--color-shadow', event.data.themeShadow);
+  }
+
+  if (event.data?.themeColor) {
+    const theme = event.data.themeColor;
+    document.documentElement.style.setProperty('--color-default', theme);
+
+    // If a specific shadow wasn't provided, fall back to theme + '70'
+    if (!event.data?.themeShadow) {
+      document.documentElement.style.setProperty('--color-shadow', theme + '70');
+    }
+  }
+
+  // If the client sends a preferred svg name, try to load it
+  if (event.data?.themeSvg) {
+    loadSvg(event.data.themeSvg);
+  } else if (!eye) {
+    // ensure at least default svg is loaded once
+    loadSvg('circle');
+  }
 
   switch (event.data.event) {
     case "visible": {
