@@ -12,6 +12,11 @@ async function loadSvg(name = 'circle') {
     const text = await res.text();
     eyeContainer.innerHTML = text;
     eye = document.getElementById('eyeSvg');
+    // If the container held the hover class before loading, transfer it to the svg
+    if (eyeContainer.classList.contains('eye-hover')) {
+      eye.classList.add('eye-hover');
+      eyeContainer.classList.remove('eye-hover');
+    }
   } catch (e) {
     // fallback to circle if specific svg not found
     if (name !== 'circle') return loadSvg('circle');
@@ -47,15 +52,27 @@ window.addEventListener("message", (event) => {
   switch (event.data.event) {
     case "visible": {
       body.style.visibility = event.data.state ? "visible" : "hidden";
-      return eye.classList.remove("eye-hover");
+      if (eye) {
+        return eye.classList.remove("eye-hover");
+      }
+
+      return eyeContainer.classList.remove("eye-hover");
     }
 
     case "leftTarget": {
-      return eye.classList.remove("eye-hover");
+      if (eye) {
+        return eye.classList.remove("eye-hover");
+      }
+
+      return eyeContainer.classList.remove("eye-hover");
     }
 
     case "setTarget": {
-      eye.classList.add("eye-hover");
+      if (eye) {
+        eye.classList.add("eye-hover");
+      } else {
+        eyeContainer.classList.add("eye-hover");
+      }
 
       if (event.data.options) {
         for (const type in event.data.options) {

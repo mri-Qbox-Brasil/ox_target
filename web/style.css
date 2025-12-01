@@ -36,6 +36,12 @@ p {
   fill: var(--color-default);
 }
 
+/* Support applying hover class on either the SVG or the container */
+#eye.eye-hover #eyeSvg .primary,
+#eyeSvg.eye-hover .primary {
+  fill: var(--color-default);
+}
+
 #options-wrapper {
   position: absolute;
   top: calc(48.5%);
@@ -104,8 +110,9 @@ p {
   }
 }
 
-/* Set first circle of the eye to theme color */
-#eyeSvg circle:first-child { fill: var(--color-default); }
+/* Prefer elements explicitly marked as primary, otherwise fall back to first child */
+#eyeSvg .primary { fill: var(--color-default); }
+#eyeSvg > *:first-child { fill: var(--color-default); }
 
 #eyeSvg {
   animation: glow 1.5s infinite;
