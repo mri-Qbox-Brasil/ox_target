@@ -39,8 +39,54 @@ local drawZoneSprites = GetConvarInt('ox_target:drawSprite', 24)
 local SetDrawOrigin = SetDrawOrigin
 local DrawSprite = DrawSprite
 local ClearDrawOrigin = ClearDrawOrigin
-local colour = vector(155, 155, 155, 175)
-local hover = vector(0, 180, 0, 255)
+-- default draw colours
+local defaultColour = vector(155, 155, 155, 175)
+local defaultHover = vector(0, 180, 0, 255)
+
+local function parseColorConvar(name, defaultVec)
+    local raw = GetConvar(name, '')
+    if raw == '' then return defaultVec end
+
+    -- remove spaces
+    raw = raw:gsub('%s+', '')
+
+    -- hex formats: #RRGGBB or #RRGGBBAA
+    if raw:match('^#%x%x%x%x%x%x$') or raw:match('^#%x%x%x%x%x%x%x%x$') then
+        local hex = raw:sub(2)
+        if #hex == 6 then
+            local r = tonumber(hex:sub(1, 2), 16)
+            local g = tonumber(hex:sub(3, 4), 16)
+            local b = tonumber(hex:sub(5, 6), 16)
+            local a = 255
+            return vector(r, g, b, a)
+        elseif #hex == 8 then
+            local r = tonumber(hex:sub(1, 2), 16)
+            local g = tonumber(hex:sub(3, 4), 16)
+            local b = tonumber(hex:sub(5, 6), 16)
+            local a = tonumber(hex:sub(7, 8), 16)
+            return vector(r, g, b, a)
+        end
+    end
+
+    -- comma separated: r,g,b[,a]
+    local parts = {}
+    for p in raw:gmatch('[^,]+') do
+        table.insert(parts, tonumber(p))
+    end
+
+    if #parts >= 3 then
+        local r = parts[1] or defaultVec.r
+        local g = parts[2] or defaultVec.g
+        local b = parts[3] or defaultVec.b
+        local a = parts[4] or defaultVec.a
+        return vector(r, g, b, a)
+    end
+
+    return defaultVec
+end
+
+local colour = parseColorConvar('ox_target:color', defaultColour)
+local hover = parseColorConvar('ox_target:color', defaultHover)
 local currentZones = {}
 local previousZones = {}
 local drawZones = {}
