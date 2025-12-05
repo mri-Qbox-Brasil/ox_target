@@ -1,43 +1,43 @@
 # ox_target
 
-![](https://img.shields.io/github/downloads/overextended/ox_target/total?logo=github)
-![](https://img.shields.io/github/downloads/overextended/ox_target/latest/total?logo=github)
-![](https://img.shields.io/github/contributors/overextended/ox_target?logo=github)
-![](https://img.shields.io/github/v/release/overextended/ox_target?logo=github)
+![](https://img.shields.io/github/downloads/mri-Qbox-Brasil/ox_target/total?logo=github)
+![](https://img.shields.io/github/downloads/mri-Qbox-Brasil/ox_target/latest/total?logo=github)
+![](https://img.shields.io/github/contributors/mri-Qbox-Brasil/ox_target?logo=github)
+![](https://img.shields.io/github/v/release/mri-Qbox-Brasil/ox_target?logo=github)
 
 
-A performant and flexible standalone "third-eye" targeting resource, with additional functionality for supported frameworks.
+Um recurso de "third-eye" (alvo) independente, performático e flexível, com funcionalidades adicionais para frameworks suportados.
 
-ox_target is the successor to qtarget, which was a mostly-compatible fork of bt-target.
-To improve many design flaws, ox_target has been written from scratch and drops support for bt-target/qtarget standards, though partial compatibility is being implemented where possible.
+ox_target é o sucessor do qtarget, que era um fork em grande parte compatível com o bt-target.
+Para corrigir várias falhas de design, o ox_target foi reescrito do zero e deixou de lado o suporte aos padrões bt-target/qtarget, embora compatibilidade parcial esteja sendo implementada onde possível.
 
 
-## 📚 Documentation
+## 📚 Documentação
 
-https://overextended.dev/ox_target
+https://docs.mriqbox.com.br/overextended/ox_target
 
 ## 💾 Download
 
-https://github.com/overextended/ox_target/releases/latest/download/ox_target.zip
+https://github.com/mri-Qbox-Brasil/ox_target
 
-## ✨ Features
+## ✨ Funcionalidades
 
-- Improved entity and world collision than its predecessor.
-- Improved error handling when running external code.
-- Menus for nested target options.
-- Partial compatibility for qtarget (the thing qb-target is based on, I made the original idiots).
-- Registering options no longer overrides existing options.
-- Groups and items checking for supported frameworks.
+- Colisão de entidades e mundo melhorada em relação ao predecessor.
+- Melhor tratamento de erros ao executar código externo.
+- Menus para opções de alvo aninhadas.
+- Compatibilidade parcial com qtarget (a base do qb-target).
+- Registrar opções não sobrescreve opções existentes.
+- Verificação de grupos e itens para frameworks suportados.
 
-## 🔧 Theme configuration (NUI)
+## 🔧 Configuração de tema (NUI)
 
-This project supports customizing the NUI theme via server/client convars. Available convars:
+Este projeto suporta personalizar o tema do NUI via convars (variáveis de console) do servidor/cliente. Convars disponíveis:
 
-- `ox_target:color` — Primary theme color (hex). Default: `#40c057`.
-- `ox_target:color_shadow` — Shadow/blur color used for glows (hex or 8-digit hex). If not set, defaults to `ox_target:color` + `70`.
-- `ox_target:eye_svg` — Name of the eye SVG to display in the UI. Supported values by default: `circle`, `diamond`, `heart`, `star`, `square`. Default: `circle`.
+- `ox_target:color` — Cor primária do tema (hex). Padrão: `#40c057`.
+- `ox_target:color_shadow` — Cor da sombra/blur usada para efeitos (hex ou hex com alpha). Se não definida, usa `ox_target:color` + `70`.
+- `ox_target:eye_svg` — Nome do SVG do ícone "olho" exibido na interface. Valores suportados por padrão: `circle`, `diamond`, `heart`, `star`, `square`. Padrão: `circle`.
 
-Examples (add to `server.cfg` or set from console):
+Exemplos (adicione em `server.cfg` ou defina via console):
 
 ```txt
 set ox_target:color #ff8800
@@ -45,7 +45,7 @@ set ox_target:color_shadow #ff880080
 set ox_target:eye_svg diamond
 ```
 
-Notes:
+Notas:
 
-- SVG variants are stored under `web/svg/` and loaded dynamically by the NUI. If a non-existent SVG name is configured, the UI falls back to `circle`.
-- The primary color is applied via CSS variables; the web UI will update when the client sends the `themeColor`/`themeShadow`/`themeSvg` NUI message.
+- As variantes de SVG ficam em `web/svg/` e são carregadas dinamicamente pela NUI. Se um nome inválido for configurado, a interface volta para `circle`.
+- A cor primária é aplicada através de variáveis CSS; a interface web será atualizada quando o cliente enviar as mensagens NUI `themeColor`/`themeShadow`/`themeSvg`.
