@@ -51,6 +51,7 @@ window.addEventListener("message", (event) => {
 
   switch (event.data.event) {
     case "visible": {
+      optionsWrapper.innerHTML = "";
       body.style.visibility = event.data.state ? "visible" : "hidden";
       if (eye) {
         return eye.classList.remove("eye-hover");
@@ -68,8 +69,10 @@ window.addEventListener("message", (event) => {
     }
 
     case "setTarget": {
+      optionsWrapper.innerHTML = "";
       if (eye) {
         eye.classList.add("eye-hover");
+        
       } else {
         eyeContainer.classList.add("eye-hover");
       }
