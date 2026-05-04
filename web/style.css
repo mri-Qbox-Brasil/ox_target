@@ -12,6 +12,11 @@ body {
   margin: 0;
   user-select: none;
   overflow: hidden;
+<<<<<<< Updated upstream
+=======
+  font-family: 'Saira', sans-serif;
+  background-color: #1a1a1a; /* Fundo escuro para teste */
+>>>>>>> Stashed changes
 }
 
 p {
@@ -27,8 +32,23 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+<<<<<<< Updated upstream
   font-size: 22pt;
   fill: black;
+=======
+  font-size: 2.5vh;
+  color: var(--color-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fallback para quando o SVG não carrega no navegador */
+#eye:empty::before {
+  content: "☉";
+  font-size: 40px;
+  filter: drop-shadow(0 0 5px var(--color-default));
+>>>>>>> Stashed changes
 }
 
 .eye-hover {

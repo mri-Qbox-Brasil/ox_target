@@ -13,7 +13,7 @@ repository 'https://github.com/overextended/ox_target'
 description ''
 
 -- Manifest
-ui_page 'web/index.html'
+ui_page 'web/dist/index.html'
 
 shared_scripts {
     '@ox_lib/init.lua',
@@ -28,6 +28,7 @@ server_scripts {
 }
 
 files {
+<<<<<<< Updated upstream
     'web/**',
     'locales/*.json',
     'client/api.lua',
@@ -40,6 +41,22 @@ files {
     'client/framework/esx.lua',
     'client/framework/qbx.lua',
     'client/compat/qtarget.lua',
+=======
+	'web/dist/**',
+	'locales/*.json',
+	'client/api.lua',
+	'client/utils.lua',
+	'client/state.lua',
+	'client/debug.lua',
+	'client/defaults.lua',
+	'client/framework/nd.lua',
+	'client/framework/ox.lua',
+	'client/framework/esx.lua',
+	'client/framework/qbx.lua',
+	'client/framework/qb.lua',
+	'client/compat/qtarget.lua',
+	'client/compat/qb-target.lua',
+>>>>>>> Stashed changes
 }
 
 provide 'qtarget'

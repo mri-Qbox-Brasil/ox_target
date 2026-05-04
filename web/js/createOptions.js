@@ -1,4 +1,4 @@
-import { fetchNui } from "./fetchNui.js";
+// window.fetchNui is already defined globally in fetchNui.js
 
 const optionsWrapper = document.getElementById("options-wrapper");
 
@@ -11,7 +11,7 @@ function onClick() {
   setTimeout(() => (this.style.pointerEvents = "auto"), 100);
 }
 
-export function createOptions(type, data, id, zoneId) {
+window.createOptions = function(type, data, id, zoneId) {
   if (data.hide) return;
 
   const option = document.createElement("div");
@@ -27,4 +27,5 @@ export function createOptions(type, data, id, zoneId) {
 
   option.addEventListener("click", onClick);
   optionsWrapper.appendChild(option);
+  console.log(`Opção criada: ${data.label} (Tipo: ${type})`);
 }

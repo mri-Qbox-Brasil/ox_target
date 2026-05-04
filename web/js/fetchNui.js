@@ -1,6 +1,11 @@
-const resource = GetParentResourceName();
+const resource = typeof GetParentResourceName !== 'undefined' ? GetParentResourceName() : 'ox_target';
 
-export async function fetchNui(eventName, data) {
+window.fetchNui = async function(eventName, data) {
+  if (typeof GetParentResourceName === 'undefined') {
+    console.log(`[Mock Fetch] Event: ${eventName}, Data:`, data);
+    return { status: 'ok' };
+  }
+
   const resp = await fetch(`https://${resource}/${eventName}`, {
     method: 'post',
     headers: {
