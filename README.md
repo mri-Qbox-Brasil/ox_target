@@ -3,7 +3,7 @@
 ![](https://img.shields.io/github/downloads/overextended/ox_target/total?logo=github)
 ![](https://img.shields.io/github/downloads/overextended/ox_target/latest/total?logo=github)
 ![](https://img.shields.io/github/contributors/overextended/ox_target?logo=github)
-![](https://img.shields.io/github/v/release/overextended/ox_target?logo=github) 
+![](https://img.shields.io/github/v/release/overextended/ox_target?logo=github)
 
 
 A performant and flexible standalone "third-eye" targeting resource, with additional functionality for supported frameworks.
@@ -22,14 +22,6 @@ https://github.com/overextended/ox_target/releases/latest/download/ox_target.zip
 
 ## ✨ Features
 
-<<<<<<< Updated upstream
-- Improved entity and world collision than its predecessor.
-- Improved error handling when running external code.
-- Menus for nested target options.
-- Partial compatibility for qtarget (the thing qb-target is based on, I made the original idiots).
-- Registering options no longer overrides existing options.
-- Groups and items checking for supported frameworks.
-=======
 - Colisão de entidades e mundo melhorada em relação ao predecessor.
 - Melhor tratamento de erros ao executar código externo.
 - Menus para opções de alvo aninhadas.
@@ -58,4 +50,3 @@ Notas:
 
 - As variantes de SVG ficam em `web/svg/` e são carregadas dinamicamente pela NUI. Se um nome inválido for configurado, a interface volta para `circle`.
 - A cor primária é aplicada através de variáveis CSS; a interface web será atualizada quando o cliente enviar as mensagens NUI `themeColor`/`themeShadow`/`themeSvg`.
->>>>>>> Stashed changes
