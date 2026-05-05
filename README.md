@@ -1,51 +1,117 @@
-# ox_target
+# 🎯 ox_target
+Sistema third-eye/target de alta performance para FiveM com integração de framework e UI personalizável.
 
-![](https://img.shields.io/github/downloads/mri-Qbox-Brasil/ox_target/total?logo=github)
-![](https://img.shields.io/github/downloads/mri-Qbox-Brasil/ox_target/latest/total?logo=github)
-![](https://img.shields.io/github/contributors/mri-Qbox-Brasil/ox_target?logo=github)
-![](https://img.shields.io/github/v/release/mri-Qbox-Brasil/ox_target?logo=github)
-
-
-Um recurso de "third-eye" (alvo) independente, performático e flexível, com funcionalidades adicionais para frameworks suportados.
-
-ox_target é o sucessor do qtarget, que era um fork em grande parte compatível com o bt-target.
-Para corrigir várias falhas de design, o ox_target foi reescrito do zero e deixou de lado o suporte aos padrões bt-target/qtarget, embora compatibilidade parcial esteja sendo implementada onde possível.
-
-
-## 📚 Documentação
-
-https://docs.mriqbox.com.br/overextended/ox_target
-
-## 💾 Download
-
-https://github.com/mri-Qbox-Brasil/ox_target
+![Version](https://img.shields.io/badge/version-1.17.3-blue)
+![Framework](https://img.shields.io/badge/framework-All-green)
+![License](https://img.shields.io/badge/license-GPL--3.0-orange)
 
 ## ✨ Funcionalidades
+- 🚀 Melhor colisão de entidade/mundo vs predecessores
+- 🛡️ Melhor tratamento de erros para código externo
+- 📋 Menus aninhados para opções de target
+- 🔄 Compatibilidade parcial com qtarget/qb-target
+- 👥 Validação de grupo e item para frameworks
+- 🎨 Temas de UI personalizáveis via convars
+- 🌐 Suporte multi-idioma
+- 🔧 Bridges de framework (ox, esx, qb, qbx, nd)
 
-- Colisão de entidades e mundo melhorada em relação ao predecessor.
-- Melhor tratamento de erros ao executar código externo.
-- Menus para opções de alvo aninhadas.
-- Compatibilidade parcial com qtarget (a base do qb-target).
-- Registrar opções não sobrescreve opções existentes.
-- Verificação de grupos e itens para frameworks suportados.
+## 📦 Dependências
+| Dependência | Obrigatório | Descrição |
+|------------|----------|-------------|
+| [ox_lib](https://github.com/overextended/ox_lib) | ✅ | Biblioteca de utilitários |
+| [FiveM](https://fivem.net/) | ✅ | Framework do jogo |
 
-## 🔧 Configuração de tema (NUI)
-
-Este projeto suporta personalizar o tema do NUI via convars (variáveis de console) do servidor/cliente. Convars disponíveis:
-
-- `ox_target:color` — Cor primária do tema (hex). Padrão: `#40c057`.
-- `ox_target:color_shadow` — Cor da sombra/blur usada para efeitos (hex ou hex com alpha). Se não definida, usa `ox_target:color` + `70`.
-- `ox_target:eye_svg` — Nome do SVG do ícone "olho" exibido na interface. Valores suportados por padrão: `circle`, `diamond`, `heart`, `star`, `square`. Padrão: `circle`.
-
-Exemplos (adicione em `server.cfg` ou defina via console):
-
-```txt
-set ox_target:color #ff8800
-set ox_target:color_shadow #ff880080
-set ox_target:eye_svg diamond
+## 📂 Estrutura de Arquivos
+```
+ox_target/
+├── client/
+│   ├── main.lua          # Lógica principal do cliente
+│   ├── api.lua           # Funções da API
+│   ├── utils.lua         # Utilitários
+│   ├── state.lua         # Gerenciamento de estado
+│   ├── debug.lua         # Ferramentas de debug
+│   ├── defaults.lua      # Opções padrão
+│   ├── framework/        # Bridges de framework
+│   └── compat/           # Compatibilidade qtarget/qb-target
+├── server/
+│   └── main.lua          # Lógica do servidor
+├── web/
+│   └── **/*               # Assets da UI
+├── locales/
+│   └── *.json             # Arquivos de tradução
+├── fxmanifest.lua         # Manifest do resource
+└── README.md              # Este arquivo
 ```
 
-Notas:
+## 🔧 Configuração
+Defina convars de tema no `server.cfg`:
+```cfg
+set ox_target:color #40c057          # Cor primária (hex)
+set ox_target:color_shadow #40c05770 # Cor da sombra (hex + alpha)
+set ox_target:eye_svg circle         # Ícone: circle, diamond, heart, star, square
+```
 
-- As variantes de SVG ficam em `web/svg/` e são carregadas dinamicamente pela NUI. Se um nome inválido for configurado, a interface volta para `circle`.
-- A cor primária é aplicada através de variáveis CSS; a interface web será atualizada quando o cliente enviar as mensagens NUI `themeColor`/`themeShadow`/`themeSvg`.
+## 📋 Exports
+### Adicionar Box Zone
+```lua
+exports.ox_target:addBoxZone({
+    coords = vector3(x, y, z),
+    size = vector3(2.0, 2.0, 2.0),
+    rotation = 0,
+    debug = false,
+    options = {
+        {
+            icon = 'fas fa-car',
+            label = 'Interagir',
+            onSelect = function(data)
+                print('Selecionado', data.entity)
+            end
+        }
+    }
+})
+```
+
+### Adicionar Entity Target
+```lua
+exports.ox_target:addLocalEntity(entity, {
+    {
+        icon = 'fas fa-key',
+        label = 'Trancar/Destrancar',
+        onSelect = function()
+            -- Lógica de trancar/destrancar
+        end
+    }
+})
+```
+
+## 📡 Eventos
+### Eventos do Cliente
+| Evento | Descrição |
+|-------|-------------|
+| `ox_target:client:addZone` | Adicionar nova zona de target |
+| `ox_target:client:removeZone` | Remover zona de target |
+
+## 🎮 Comandos
+Sem comandos diretos, use exports para registrar targets.
+
+## 🚀 Instalação
+1. Baixe do [GitHub](https://github.com/communityox/ox_target)
+2. Coloque no diretório `resources`
+3. Adicione ao `server.cfg`:
+   ```cfg
+   ensure ox_lib
+   ensure ox_target
+   ```
+4. Reinicie o servidor
+
+## 🔄 Compatibilidade
+Fornece compatibilidade para:
+- `qtarget` (parcial)
+- `qb-target` (parcial)
+
+## 📚 Documentação
+Docs completos: https://docs.mriqbox.com.br/overextended/ox_target
+
+## 🤝 Créditos
+- [Overextended](https://github.com/overextended) - Desenvolvimento core
+- [mri-Qbox-Brasil](https://github.com/mri-Qbox-Brasil) - Localização e adições de tema
