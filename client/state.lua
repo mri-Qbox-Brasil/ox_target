@@ -12,10 +12,7 @@ function state.setActive(value)
     isActive = value
 
     if value then
-        local color = GetConvar('ox_target:color', '#40c057')
-        local shadow = GetConvar('ox_target:color_shadow', color .. '70')
-        local svg = GetConvar('ox_target:eye_svg', 'circle')
-        SendNuiMessage('{"event": "visible", "state": true, "themeColor": "' .. color .. '", "themeShadow": "' .. shadow .. '", "themeSvg": "' .. svg .. '"}')
+        SendNuiMessage('{"event": "visible", "state": true}')
     end
 end
 

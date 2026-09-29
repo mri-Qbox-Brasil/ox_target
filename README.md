@@ -1,7 +1,7 @@
 # 🎯 ox_target
 Sistema third-eye/target de alta performance para FiveM com integração de framework e UI personalizável.
 
-![Version](https://img.shields.io/badge/version-1.17.3-blue)
+![Version](https://img.shields.io/badge/version-1.18.1-blue)
 ![Framework](https://img.shields.io/badge/framework-All-green)
 ![License](https://img.shields.io/badge/license-GPL--3.0-orange)
 
@@ -11,9 +11,9 @@ Sistema third-eye/target de alta performance para FiveM com integração de fram
 - 📋 Menus aninhados para opções de target
 - 🔄 Compatibilidade parcial com qtarget/qb-target
 - 👥 Validação de grupo e item para frameworks
-- 🎨 Temas de UI personalizáveis via convars
+- 🎨 Interface no tema da suíte MRI (`@mriqbox/ui-kit`), controlada pelo `/uiconfig` do ox_lib
 - 🌐 Suporte multi-idioma
-- 🔧 Bridges de framework (ox, esx, qb, qbx, nd)
+- 🔧 Bridges de framework (ox, esx, qbx, nd)
 
 ## 📦 Dependências
 | Dependência | Obrigatório | Descrição |
@@ -32,11 +32,13 @@ ox_target/
 │   ├── debug.lua         # Ferramentas de debug
 │   ├── defaults.lua      # Opções padrão
 │   ├── framework/        # Bridges de framework
-│   └── compat/           # Compatibilidade qtarget/qb-target
+│   └── compat/           # Compatibilidade qtarget
 ├── server/
 │   └── main.lua          # Lógica do servidor
+├── mri/                  # Modificações MRI (ver mri/README.md)
 ├── web/
-│   └── **/*               # Assets da UI
+│   ├── src/              # Interface em React
+│   └── build/            # Build da interface (carregado pelo jogo)
 ├── locales/
 │   └── *.json             # Arquivos de tradução
 ├── fxmanifest.lua         # Manifest do resource
@@ -44,12 +46,9 @@ ox_target/
 ```
 
 ## 🔧 Configuração
-Defina convars de tema no `server.cfg`:
-```cfg
-set ox_target:color #40c057          # Cor primária (hex)
-set ox_target:color_shadow #40c05770 # Cor da sombra (hex + alpha)
-set ox_target:eye_svg circle         # Ícone: circle, diamond, heart, star, square
-```
+O visual segue o tema da suíte MRI: cor de destaque pela convar `mri:color`,
+fundo pela `mri:backgroundColor` e o resto (tema, fonte, radius, opacidade)
+pelo `/uiconfig` do ox_lib. Detalhes em `mri/README.md`.
 
 ## 📋 Exports
 ### Adicionar Box Zone
@@ -95,7 +94,7 @@ exports.ox_target:addLocalEntity(entity, {
 Sem comandos diretos, use exports para registrar targets.
 
 ## 🚀 Instalação
-1. Baixe do [GitHub](https://github.com/communityox/ox_target)
+1. Baixe do [GitHub](https://github.com/overextended/ox_target)
 2. Coloque no diretório `resources`
 3. Adicione ao `server.cfg`:
    ```cfg
